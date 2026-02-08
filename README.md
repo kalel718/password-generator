@@ -21,3 +21,92 @@ If you run the script and enter 9 for the length, you might get something like t
 Enter length:9
 1or2z^PJb
 (The password will be different every time you run it!)
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 80px;
+            text-align: center;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #passwordDisplay {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Password Generator</h1>
+        <p>Enter desired password length:</p>
+        <input type="number" id="lengthInput" value="12" min="1" max="100">
+        <button onclick="generatePassword()">Generate Password</button>
+        <div id="passwordDisplay"></div>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const char = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+            const length = parseInt(document.getElementById('lengthInput').value);
+            let password = '';
+
+            if (isNaN(length) || length < 1 || length > 100) {
+                document.getElementById('passwordDisplay').innerText = 'Please enter a length between 1 and 100.';
+                return;
+            }
+
+            for (let i = 0; i < length; i++) {
+                password += char.charAt(Math.floor(Math.random() * char.length));
+            }
+            document.getElementById('passwordDisplay').innerText = `Generated Password: ${password}`;
+        }
+
+        // Generate a password on page load for initial display
+        generatePassword();
+    </script>
+</body>
+</html>
